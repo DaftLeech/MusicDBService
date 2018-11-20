@@ -1,9 +1,15 @@
 package test;
 
 import com.codahale.metrics.annotation.Timed;
+
+import java.util.ArrayList;
 import java.util.Optional;
+
+import database.DB;
+import types.Song;
 import types.StringJSON;
 
+import javax.swing.table.DefaultTableModel;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -25,9 +31,21 @@ public class TestRessource {
     }
 
     @GET
-    @Timed
-    public StringJSON sayHello(@QueryParam("name") Optional<String> name) {
-        final String value = String.format(template, name.orElse(defaultName));
-        return new StringJSON(1, value);
+    @Path("/xD")
+    public ArrayList<Song> sayHello(@QueryParam("name")String name) {
+        final String value = String.format(template, name == "" ? defaultName : name);
+
+        String sql = "SELECT * FROM song WHERE songName LIKE '%" + name + "%'";
+        DefaultTableModel tbl = DB.getInstance().tableSelect(sql);
+
+        ArrayList<Song> returnList = new ArrayList<>();
+        for (int rowID = 0; rowID < tbl.getRowCount(); rowID++) {
+            returnList.add(new Song(Long.valueOf((int)tbl.getValueAt(rowID, 0))
+                    , (String) tbl.getValueAt(rowID, 1)
+                    , Long.valueOf((int)tbl.getValueAt(rowID, 2))
+            ));
+        }
+
+        return returnList;
     }
 }

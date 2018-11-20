@@ -1,6 +1,7 @@
 package general;
 
 import conf.ServiceConfiguration;
+import database.DB;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
@@ -20,7 +21,9 @@ public class Main extends Application<ServiceConfiguration> {
 
     @Override
     public void initialize(Bootstrap<ServiceConfiguration> bootstrap) {
-        // nothing to do yet
+        System.out.println("Connecting to Database...");
+        DB.getInstance().connectToDB("localhost",3306,"musicDB","root","");
+        System.out.println("Connected.");
     }
 
     public void run(ServiceConfiguration configuration, Environment environment) throws Exception {
