@@ -6,15 +6,17 @@ public class Song {
 
     private long songID;
     private String songName;
+    private long songLength;
     private long albumID;
 
     public Song(){
 
     }
 
-    public Song(long songID, String songName, long albumID){
+    public Song(long songID, String songName, long songLength, long albumID){
         this.songID = songID;
         this.songName = songName;
+        this.songLength = songLength;
         this.albumID = albumID;
     }
 
@@ -29,7 +31,12 @@ public class Song {
     }
 
     @JsonProperty
-    public long getAlbumID() {
+    public long getsongLength() {
+        return songLength;
+    }
+
+    @JsonProperty
+    public long getAlbumID(){
         return albumID;
     }
 }

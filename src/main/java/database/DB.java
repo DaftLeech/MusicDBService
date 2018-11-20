@@ -106,6 +106,8 @@ public class DB {
         if (!isConnected())
             return null;
 
+        System.out.println(sql);
+
         Connection con = null;
         PreparedStatement st = null;
         ResultSet rs = null;

@@ -5,7 +5,9 @@ import database.DB;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
-import test.TestRessource;
+import test.AlbumRessource;
+import test.InterpreterRessource;
+import test.SongRessource;
 
 
 public class Main extends Application<ServiceConfiguration> {
@@ -27,10 +29,12 @@ public class Main extends Application<ServiceConfiguration> {
     }
 
     public void run(ServiceConfiguration configuration, Environment environment) throws Exception {
-        final TestRessource resource = new TestRessource(
+        final SongRessource resource = new SongRessource(
                 configuration.getTemplate(),
                 configuration.getDefaultName()
         );
         environment.jersey().register(resource);
+        environment.jersey().register(new AlbumRessource(configuration.getTemplate(),configuration.getDefaultName()));
+        environment.jersey().register(new InterpreterRessource(configuration.getTemplate(),configuration.getDefaultName()));
     }
 }
