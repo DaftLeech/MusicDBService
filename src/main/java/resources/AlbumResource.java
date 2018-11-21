@@ -1,9 +1,8 @@
-package test;
+package resources;
 
 
 import database.DB;
 import types.Album;
-import types.Song;
 
 import javax.swing.table.DefaultTableModel;
 import javax.ws.rs.GET;
@@ -15,12 +14,12 @@ import java.util.ArrayList;
 
 @Path("/Album")
 @Produces(MediaType.APPLICATION_JSON)
-public class AlbumRessource {
+public class AlbumResource {
 
     private final String template;
     private final String defaultName;
 
-    public AlbumRessource(String template, String defaultName) {
+    public AlbumResource(String template, String defaultName) {
         this.template = template;
         this.defaultName = defaultName;
     }

@@ -1,4 +1,4 @@
-package test;
+package resources;
 
 
 import database.DB;
@@ -14,12 +14,12 @@ import java.util.ArrayList;
 
 @Path("/Interpreter")
 @Produces(MediaType.APPLICATION_JSON)
-public class InterpreterRessource {
+public class InterpreterResource {
 
     private final String template;
     private final String defaultName;
 
-    public InterpreterRessource(String template, String defaultName) {
+    public InterpreterResource(String template, String defaultName) {
         this.template = template;
         this.defaultName = defaultName;
     }
@@ -46,7 +46,7 @@ public class InterpreterRessource {
     @Path("/byAlbumID")
     public ArrayList<Interpreter> getByInterID(@QueryParam("albumID")String albumID) {
 
-        String sql = "SELECT interID,interName FROM interpreter" +
+        String sql = "SELECT interpreter.interID,interName FROM interpreter" +
                 " INNER JOIN album ON album.interID = interpreter.interID WHERE albumID =" + albumID+"";
         DefaultTableModel tbl = DB.getInstance().tableSelect(sql);
 

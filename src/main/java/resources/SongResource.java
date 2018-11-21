@@ -1,13 +1,9 @@
-package test;
-
-import com.codahale.metrics.annotation.Timed;
+package resources;
 
 import java.util.ArrayList;
-import java.util.Optional;
 
 import database.DB;
 import types.Song;
-import types.StringJSON;
 
 import javax.swing.table.DefaultTableModel;
 import javax.ws.rs.GET;
@@ -18,12 +14,12 @@ import javax.ws.rs.core.MediaType;
 
 @Path("/Song")
 @Produces(MediaType.APPLICATION_JSON)
-public class SongRessource {
+public class SongResource {
 
     private final String template;
     private final String defaultName;
 
-    public SongRessource(String template, String defaultName) {
+    public SongResource(String template, String defaultName) {
         this.template = template;
         this.defaultName = defaultName;
     }
