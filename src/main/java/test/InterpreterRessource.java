@@ -41,4 +41,22 @@ public class InterpreterRessource {
 
         return returnList;
     }
+
+    @GET
+    @Path("/byAlbumID")
+    public ArrayList<Interpreter> getByInterID(@QueryParam("albumID")String albumID) {
+
+        String sql = "SELECT interID,interName FROM interpreter" +
+                " INNER JOIN album ON album.interID = interpreter.interID WHERE albumID =" + albumID+"";
+        DefaultTableModel tbl = DB.getInstance().tableSelect(sql);
+
+        ArrayList<Interpreter> returnList = new ArrayList<>();
+        for (int rowID = 0; rowID < tbl.getRowCount(); rowID++) {
+            returnList.add(new Interpreter(Long.valueOf((int)tbl.getValueAt(rowID, 0))
+                    , (String) tbl.getValueAt(rowID, 1)
+            ));
+        }
+
+        return returnList;
+    }
 }
