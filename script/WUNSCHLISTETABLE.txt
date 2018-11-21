@@ -1,0 +1,6 @@
+USE musicdb;
+
+CREATE TABLE wunschliste(
+kundeID INT,
+songID INT
+);

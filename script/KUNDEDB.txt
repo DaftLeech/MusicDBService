@@ -1,0 +1,19 @@
+CREATE DATABASE kundedb;
+USE kundedb;
+
+CREATE TABLE user(
+userID INT AUTO_INCREMENT,
+userName VARCHAR (40),
+password VARCHAR (120),
+PRIMARY KEY (userID)
+);
+
+
+CREATE TABLE session(
+sessionID INT AUTO_INCREMENT,
+startTime DATETIME,
+endTime DATETIME,
+userID INT,
+PRIMARY KEY (sessionID),
+FOREIGN KEY (userID) REFERENCES user(userID)
+);
