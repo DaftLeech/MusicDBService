@@ -8,6 +8,7 @@ import io.dropwizard.setup.Environment;
 import resources.AlbumResource;
 import resources.InterpreterResource;
 import resources.SongResource;
+import resources.WishlistResource;
 
 
 public class Main extends Application<ServiceConfiguration> {
@@ -36,5 +37,6 @@ public class Main extends Application<ServiceConfiguration> {
         environment.jersey().register(resource);
         environment.jersey().register(new AlbumResource(configuration.getTemplate(),configuration.getDefaultName()));
         environment.jersey().register(new InterpreterResource(configuration.getTemplate(),configuration.getDefaultName()));
+        environment.jersey().register(new WishlistResource());
     }
 }

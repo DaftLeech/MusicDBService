@@ -165,7 +165,11 @@ public class DB {
 
     public Object scalarSelect(String sql) {
 
-        return tableSelect(sql).getValueAt(1, 0);
+        DefaultTableModel model = tableSelect(sql);
+        if(model.getRowCount()==0)
+            return null;
+
+        return model.getValueAt(0, 0);
 
     }
 

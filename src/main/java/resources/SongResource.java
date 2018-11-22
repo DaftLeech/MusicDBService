@@ -42,4 +42,23 @@ public class SongResource {
 
         return returnList;
     }
+
+    @GET
+    @Path("/byAlbumIDAndSongIDs")
+    public ArrayList<Song> getByAlbumAndSongIDs(@QueryParam("albumID")String albumID,@QueryParam("songIDs")String songIDs) {
+
+        String sql = "SELECT songID,songName,songLength, albumID FROM song WHERE albumID = " + albumID+" AND songID IN ("+songIDs+")";
+        DefaultTableModel tbl = DB.getInstance().tableSelect(sql);
+
+        ArrayList<Song> returnList = new ArrayList<>();
+        for (int rowID = 0; rowID < tbl.getRowCount(); rowID++) {
+            returnList.add(new Song(Long.valueOf((int)tbl.getValueAt(rowID, 0))
+                    , (String) tbl.getValueAt(rowID, 1)
+                    , Long.valueOf((int)tbl.getValueAt(rowID, 2))
+                    , Long.valueOf((int)tbl.getValueAt(rowID, 3))
+            ));
+        }
+
+        return returnList;
+    }
 }
